@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SingletonMono<T> : MonoBehaviour where T:MonoBehaviour
 {
+    // 中文注释
     private static T instance;
 
     public static T Instance

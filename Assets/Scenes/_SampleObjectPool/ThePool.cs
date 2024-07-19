@@ -3,10 +3,10 @@ using UnityEngine.Pool;
 
 public class ThePool : SingletonMono<ThePool>
 {
-    // ◊”µØ‘§÷∆ÃÂ
+    // Â≠êÂºπÈ¢ÑÂà∂‰Ωì
     public BulletOrSomethingSpawnFrequently bulletPrefab;
 
-    // ∂‘œÛ≥ÿ
+    // ÂØπË±°Ê±†
     private ObjectPool<BulletOrSomethingSpawnFrequently> bulletPool;
 
     private new void Awake()
@@ -38,10 +38,20 @@ public class ThePool : SingletonMono<ThePool>
     {
         bulletPool.Release(BulletOrSomethingSpawnFrequently);
     }
-    public void ShootBullet(Vector3 position, Vector3 direction)
+    void ShootBullet(Vector3 position, Vector3 direction)
     {
         BulletOrSomethingSpawnFrequently BulletOrSomethingSpawnFrequently = bulletPool.Get();
         BulletOrSomethingSpawnFrequently.transform.position = position;
-        BulletOrSomethingSpawnFrequently.Shoot(direction);
+        BulletOrSomethingSpawnFrequently.Ctor(direction);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 vector3 = new Vector3(mousePos.x, mousePos.y, 0);
+            ShootBullet(vector3, Vector3.up);
+        }
     }
 }
